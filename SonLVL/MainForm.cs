@@ -776,8 +776,8 @@ namespace SonicRetro.SonLVL.GUI
 			UpdateScrollControls();
 			ChunkID.Maximum = LevelData.NewChunks.chunkList.Length - 1;
 			TileID.Maximum = LevelData.NewTiles.Length - 1;
-			ChunkCount.Text = LevelData.NewChunks.chunkList.Length.ToString("X");
-			TileCount.Text = LevelData.NewTiles.Length.ToString("X");
+			ChunkCount.Text = "511";
+			TileCount.Text = "1023";
 			deleteUnusedTilesToolStripButton.Enabled = deleteUnusedChunksToolStripButton.Enabled =
 				removeDuplicateTilesToolStripButton.Enabled = removeDuplicateChunksToolStripButton.Enabled =
 				replaceChunkBlocksToolStripButton.Enabled = bgLayerDropDown.Enabled = replaceBackgroundToolStripButton.Enabled = replaceForegroundToolStripButton.Enabled =
@@ -2808,7 +2808,7 @@ namespace SonicRetro.SonLVL.GUI
 			chunkBlockEditor.SelectedObjects = new[] { LevelData.NewChunks.chunkList[SelectedChunk].tiles[0][0] };
 			DrawChunkPicture();
 			ChunkID.Value = SelectedChunk;
-			ChunkCount.Text = LevelData.NewChunks.chunkList.Length.ToString("X");
+			ChunkCount.Text = "511";
 			DrawLevel();
 		}
 

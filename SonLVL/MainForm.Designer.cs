@@ -835,10 +835,10 @@ namespace SonicRetro.SonLVL.GUI
 			// 
 			// TileID
 			// 
-			this.TileID.Hexadecimal = true;
+			this.TileID.Hexadecimal = false;
 			this.TileID.Location = new System.Drawing.Point(3, 61);
 			this.TileID.Maximum = new decimal(new int[] {
-            2047,
+            1023,
             0,
             0,
             0});
@@ -867,7 +867,7 @@ namespace SonicRetro.SonLVL.GUI
 			this.TileCount.Name = "TileCount";
 			this.TileCount.Size = new System.Drawing.Size(42, 13);
 			this.TileCount.TabIndex = 4;
-			this.TileCount.Text = "0 / 800";
+			this.TileCount.Text = "1023";
 			// 
 			// tableLayoutPanel5
 			// 
@@ -947,7 +947,7 @@ namespace SonicRetro.SonLVL.GUI
 			this.ChunkCount.Name = "ChunkCount";
 			this.ChunkCount.Size = new System.Drawing.Size(42, 13);
 			this.ChunkCount.TabIndex = 3;
-			this.ChunkCount.Text = "0 / 100";
+			this.ChunkCount.Text = "0 / 511";
 			// 
 			// chunkCtrlLabel
 			// 
@@ -961,7 +961,7 @@ namespace SonicRetro.SonLVL.GUI
 			// 
 			// ChunkID
 			// 
-			this.ChunkID.Hexadecimal = true;
+			this.ChunkID.Hexadecimal = false;
 			this.ChunkID.Location = new System.Drawing.Point(8, 32);
 			this.ChunkID.Maximum = new decimal(new int[] {
             255,
