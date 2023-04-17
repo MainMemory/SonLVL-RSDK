@@ -68,7 +68,7 @@
 			// findChunk
 			// 
 			this.findChunk.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.findChunk.Hexadecimal = true;
+			this.findChunk.Hexadecimal = false;
 			this.findChunk.Location = new System.Drawing.Point(0, 272);
 			this.findChunk.Maximum = new decimal(new int[] {
             255,
@@ -134,7 +134,7 @@
 			// replaceChunk
 			// 
 			this.replaceChunk.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.replaceChunk.Hexadecimal = true;
+			this.replaceChunk.Hexadecimal = false;
 			this.replaceChunk.Location = new System.Drawing.Point(0, 272);
 			this.replaceChunk.Maximum = new decimal(new int[] {
             255,

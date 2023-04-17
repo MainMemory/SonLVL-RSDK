@@ -62,7 +62,7 @@ namespace SonicRetro.SonLVL
 			// chunkSelect
 			// 
 			this.chunkSelect.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.chunkSelect.Hexadecimal = true;
+			this.chunkSelect.Hexadecimal = false;
 			this.chunkSelect.Location = new System.Drawing.Point(0, 272);
 			this.chunkSelect.Maximum = new decimal(new int[] {
             255,

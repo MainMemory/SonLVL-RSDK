@@ -129,7 +129,7 @@ namespace SonicRetro.SonLVL
 			// 
 			// SourceTile
 			// 
-			this.SourceTile.Hexadecimal = true;
+			this.SourceTile.Hexadecimal = false;
 			this.SourceTile.Location = new System.Drawing.Point(252, 12);
 			this.SourceTile.Maximum = new decimal(new int[] {
 			65535,
@@ -144,7 +144,7 @@ namespace SonicRetro.SonLVL
 			// DestinationTile
 			// 
 			this.DestinationTile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.DestinationTile.Hexadecimal = true;
+			this.DestinationTile.Hexadecimal = false;
 			this.DestinationTile.Location = new System.Drawing.Point(500, 12);
 			this.DestinationTile.Maximum = new decimal(new int[] {
 			65535,
