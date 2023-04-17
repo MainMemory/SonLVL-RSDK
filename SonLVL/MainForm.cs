@@ -113,6 +113,7 @@ namespace SonicRetro.SonLVL.GUI
 		List<Bitmap> savedLayoutSectionImages;
 		MouseButtons chunkblockMouseDraw = MouseButtons.Left;
 		MouseButtons chunkblockMouseSelect = MouseButtons.Right;
+		Dictionary<int, int> objectTypeListMap = new Dictionary<int, int>();
 
 		internal void Log(params string[] lines)
 		{
@@ -797,6 +798,7 @@ namespace SonicRetro.SonLVL.GUI
 			objectTypeList.Items.Clear();
 			objectTypeImages.Images.Clear();
 			objectTypeImages.Images.Add(LevelData.UnknownImg.Resize(objectTypeImages.ImageSize));
+			objectTypeListMap.Clear();
 			for (int i = 1; i < LevelData.ObjTypes.Count; i++)
 			{
 				Bitmap image = LevelData.ObjTypes[i].Image.GetBitmap().ToBitmap(LevelData.BmpPal);
@@ -804,6 +806,7 @@ namespace SonicRetro.SonLVL.GUI
 				objectTypeImages.Images.Add(image.Resize(objectTypeImages.ImageSize));
 				if (!LevelData.ObjTypes[i].Hidden)
 				{
+					objectTypeListMap.Add(i, objectTypeList.Items.Count);
 					ObjectSelect.listView1.Items.Add(new ListViewItem(LevelData.ObjTypes[i].Name, ObjectSelect.imageList1.Images.Count - 1) { Tag = (byte)i });
 					objectTypeList.Items.Add(new ListViewItem(LevelData.ObjTypes[i].Name, objectTypeImages.Images.Count - 1) { Tag = (byte)i });
 				}
@@ -7093,9 +7096,13 @@ namespace SonicRetro.SonLVL.GUI
 			LevelData.ObjTypes.Add(def);
 			Bitmap image = def.Image.GetBitmap().ToBitmap(LevelData.BmpPal);
 			ObjectSelect.imageList1.Images.Add(image.Resize(ObjectSelect.imageList1.ImageSize));
-			ObjectSelect.listView1.Items.Add(new ListViewItem(def.Name, ObjectSelect.imageList1.Images.Count - 1));
 			objectTypeImages.Images.Add(image.Resize(objectTypeImages.ImageSize));
-			objectTypeList.Items.Add(new ListViewItem(def.Name, objectTypeImages.Images.Count - 1));
+			if (!def.Hidden)
+			{
+				objectTypeListMap.Add(LevelData.ObjTypes.Count - 1, objectTypeList.Items.Count);
+				ObjectSelect.listView1.Items.Add(new ListViewItem(def.Name, ObjectSelect.imageList1.Images.Count - 1) { Tag = (byte)(LevelData.ObjTypes.Count - 1) });
+				objectTypeList.Items.Add(new ListViewItem(def.Name, objectTypeImages.Images.Count - 1) { Tag = (byte)(LevelData.ObjTypes.Count - 1) });
+			}
 			objectListBox.Items.Add(info.name);
 			objectListBox.SelectedIndex = objectListBox.Items.Count - 1;
 			objectAddButton.Enabled = LevelData.ObjTypes.Count < 256;
@@ -7165,8 +7172,11 @@ namespace SonicRetro.SonLVL.GUI
 			if (LevelData.StageConfig.loadGlobalObjects)
 				idx += (byte)LevelData.GlobalObjects.Count;
 			LevelData.GetObjectDefinition(idx).Init(info);
-			ObjectSelect.listView1.Items[idx - 1].Text = objectNameBox.Text;
-			objectTypeList.Items[idx - 1].Text = objectNameBox.Text;
+			if (objectTypeListMap.TryGetValue(idx, out var idx2))
+			{
+				ObjectSelect.listView1.Items[idx2].Text = objectNameBox.Text;
+				objectTypeList.Items[idx2].Text = objectNameBox.Text;
+			}
 			loaded = false;
 			objectListBox.Items[objectListBox.SelectedIndex] = objectNameBox.Text;
 			loaded = true;
@@ -7186,8 +7196,11 @@ namespace SonicRetro.SonLVL.GUI
 			var def = LevelData.MakeObjectDefinition(info);
 			LevelData.ObjTypes[idx] = def;
 			Bitmap image = def.Image.GetBitmap().ToBitmap(LevelData.BmpPal);
-			ObjectSelect.imageList1.Images[idx - 1] = image.Resize(ObjectSelect.imageList1.ImageSize);
-			objectTypeImages.Images[idx] = image.Resize(objectTypeImages.ImageSize);
+			if (objectTypeListMap.TryGetValue(idx, out var idx2))
+			{
+				ObjectSelect.imageList1.Images[idx2] = image.Resize(ObjectSelect.imageList1.ImageSize);
+				objectTypeImages.Images[idx2 + 1] = image.Resize(objectTypeImages.ImageSize);
+			}
 			foreach (var item in LevelData.Objects)
 				if (item.Type == idx)
 					item.UpdateSprite();
