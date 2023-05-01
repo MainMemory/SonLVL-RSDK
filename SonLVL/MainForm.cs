@@ -5469,8 +5469,8 @@ namespace SonicRetro.SonLVL.GUI
 			if (e.Data.GetDataPresent("SonLVLChunkIndex_" + pid))
 			{
 				Point clientPoint = ChunkSelector.PointToClient(new Point(e.X, e.Y));
-				byte newindex = (byte)ChunkSelector.GetItemAtPoint(clientPoint);
-				byte oldindex = (byte)(int)e.Data.GetData("SonLVLChunkIndex_" + pid);
+				ushort newindex = (ushort)ChunkSelector.GetItemAtPoint(clientPoint);
+				ushort oldindex = (ushort)(int)e.Data.GetData("SonLVLChunkIndex_" + pid);
 				if (newindex == oldindex) return;
 				if ((ModifierKeys & Keys.Control) == Keys.Control)
 				{
@@ -5505,16 +5505,16 @@ namespace SonicRetro.SonLVL.GUI
 						if (newindex > oldindex)
 						{
 							if (c == oldindex)
-								layout[y][x] = (byte)(newindex - 1);
+								layout[y][x] = (ushort)(newindex - 1);
 							else if (c > oldindex && c < newindex)
-								layout[y][x] = (byte)(c - 1);
+								layout[y][x] = (ushort)(c - 1);
 						}
 						else
 						{
 							if (c == oldindex)
 								layout[y][x] = newindex;
 							else if (c >= newindex && c < oldindex)
-								layout[y][x] = (byte)(c + 1);
+								layout[y][x] = (ushort)(c + 1);
 						}
 					});
 					if (newindex > oldindex)
