@@ -1209,9 +1209,6 @@ namespace SonicRetro.SonLVL.API
 		{
 			NewPalette.CopyTo(BmpPal.Entries, 0);
 			BmpPal.Entries[ColorTransparent] = Color.Transparent;
-			BmpPal.Entries[ColorWhite] = Color.White;
-			BmpPal.Entries[ColorYellow] = Color.Yellow;
-			BmpPal.Entries[ColorBlack] = Color.Black;
 			foreach (Bitmap item in NewTileBmps)
 				item.Palette = BmpPal;
 			foreach (Bitmap[] item in ChunkBmps)

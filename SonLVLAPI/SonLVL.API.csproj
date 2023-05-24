@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SonLVLUndoSystem.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="TileList.cs">
       <SubType>UserControl</SubType>
@@ -100,6 +101,7 @@
     <Compile Include="TileList.Designer.cs">
       <DependentUpon>TileList.cs</DependentUpon>
     </Compile>
+    <Compile Include="UndoSystem.cs" />
     <Compile Include="XMLDef.cs" />
   </ItemGroup>
   <ItemGroup>

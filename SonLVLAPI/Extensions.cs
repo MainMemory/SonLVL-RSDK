@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Globalization;
+using System.IO.Compression;
 
 namespace SonicRetro.SonLVL.API
 {
@@ -587,6 +588,28 @@ namespace SonicRetro.SonLVL.API
 			longval |= longval << 32;
 			fixed (char* fp = arr)
 				FastFillInternal(fp, longval, arr.Length * 2);
+		}
+
+		public static void ReadDeflateBlock(this Stream stream, Action<Stream> action)
+		{
+			BinaryReader br = new BinaryReader(stream);
+			int len = br.ReadInt32();
+			using (var ms2 = new MemoryStream(br.ReadBytes(len)))
+			using (var ds = new DeflateStream(ms2, CompressionMode.Decompress))
+				action(ds);
+		}
+
+		public static void WriteDeflateBlock(this Stream stream, Action<Stream> action)
+		{
+			BinaryWriter bw = new BinaryWriter(stream);
+			using (var ms2 = new MemoryStream())
+			{
+				using (var ds = new DeflateStream(ms2, CompressionLevel.Fastest))
+					action(ds);
+				byte[] array = ms2.ToArray();
+				bw.Write(array.Length);
+				bw.Write(array);
+			}
 		}
 	}
 }

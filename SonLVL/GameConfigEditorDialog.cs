@@ -536,6 +536,8 @@ namespace SonicRetro.SonLVL
 
 		private void okButton_Click(object sender, EventArgs e)
 		{
+			if (MessageBox.Show(this, "Editing GameConfig cannot be undone, and will reload the currently open level (if any). Proceed?", "SonLVL-RSDK", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel)
+				return;
 			List<ObjectXML> tmpobjects = new List<ObjectXML>(objects);
 			if (isxml)
 			{
